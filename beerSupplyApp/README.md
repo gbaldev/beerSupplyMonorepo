@@ -2,25 +2,27 @@
 
 Instructions for setting up and running the project.
 
-## Step 1: Install dependencies
+## Step 1: Install Dependencies
 ```bash
-# Install with npm
+# Install dependencies with npm
 npm install
-# Install pods
+
+# Install CocoaPods dependencies
 cd ios
 pod install
 ```
 
-## Step 2: Start metro bunlder
-In a separated terminal run
+## Step 2: Start  Metro Bundler
+In a separate terminal, run:
+
 ```bash
 # using npm
 npm start
 ```
 
-## Step 3: Run Simulator/Emulator
-At this point, you should be able to run the app in the iOS simulator or in the Android emulator by typing **i** or **a** respectively.
+## Step 3: Run on Simulator/Emulator
+You should now be able to run the app on the iOS simulator or Android emulator by typing **i** or **a** respectively.
 
 ![alt text](image.png)
 
-You can also run directly from Xcode or Android Studio.
+Alternatively, you can also run the app directly from Xcode or Android Studio.
