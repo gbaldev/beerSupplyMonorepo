@@ -23,4 +23,4 @@ At this point, you should be able to run the app in the iOS simulator or in the 
 
 ![alt text](image.png)
 
-You can also run directly from xCode or Android Studio.
+You can also run directly from Xcode or Android Studio.
