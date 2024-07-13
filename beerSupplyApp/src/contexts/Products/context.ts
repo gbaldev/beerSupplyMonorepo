@@ -10,6 +10,9 @@ export type ProductContextType = {
   stockBySKU: StockMap;
   onSelectSku: (sku: string, productId: number) => void;
   updateSku: (sku: string, stock: Stock) => void;
+  isLoading: boolean;
+  error: boolean;
+  refetch: () => void;
 };
 
 const ProductsContext = createContext<ProductContextType | null>(null);

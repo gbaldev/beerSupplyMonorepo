@@ -5,23 +5,36 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Text, View, FlatList, Animated } from 'react-native';
+import {
+  Text,
+  View,
+  FlatList,
+  Animated,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useStyles from './styles';
 import ProductCard from './components/ProductCard';
 import AddToCartModal from './components/AddToCartModal';
 import Separator from '@components/Separator';
 import Product from '@models/Product';
-import { fontStyle } from '@utils/constants';
+import { colors, fontStyle } from '@utils/constants';
 
 interface HomeScreenProps {
   products: Product[];
   displayName: string;
+  isError: boolean;
+  isLoading: boolean;
+  onRefresh: () => void;
 }
 
 export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
   products,
   displayName,
+  isError,
+  isLoading,
+  onRefresh,
 }) => {
   const OFFSET = 80;
   const navigation = useNavigation();
@@ -47,7 +60,8 @@ export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
   const Header = useCallback(() => {
     return (
       <Animated.View
-        style={[styles.headerContainer, { opacity: headerOpacity }]}>
+        style={[styles.headerContainer, { opacity: headerOpacity }]}
+      >
         <Text style={fontStyle.DM_SANS_400_16}>Hi {displayName},</Text>
         <Separator height={10} />
         <Text style={fontStyle.DM_SANS_700_24}>Welcome Back!</Text>
@@ -80,6 +94,14 @@ export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
     };
   }, [scrollY, navigation]);
 
+  if (isLoading) {
+    return (
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Text>Loading</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <AddToCartModal
@@ -88,23 +110,40 @@ export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
         productDetail={productDeatil.current}
         productName={productName.current}
       />
-      <FlatList
-        style={styles.flatList}
-        ListHeaderComponent={Header}
-        onScroll={onScrollHandler}
-        showsVerticalScrollIndicator={false}
-        data={products}
-        numColumns={2}
-        renderItem={({ item, index }) => {
-          return (
-            <ProductCard
-              productId={item.id}
-              index={index}
-              handleAddToCart={handleAddToCart}
+      {isError ? (
+        <>
+          <View style={styles.imageContainer}>
+            <Image
+              source={require('../../assets/images/error.png')}
+              style={styles.imageError}
+              resizeMode="contain"
             />
-          );
-        }}
-      />
+          </View>
+          <TouchableOpacity style={styles.button} onPress={onRefresh}>
+            <Text style={[fontStyle.DM_SANS_700_24, { color: colors.white }]}>
+              Retry
+            </Text>
+          </TouchableOpacity>
+        </>
+      ) : (
+        <FlatList
+          style={styles.flatList}
+          ListHeaderComponent={Header}
+          onScroll={onScrollHandler}
+          showsVerticalScrollIndicator={false}
+          data={products}
+          numColumns={2}
+          renderItem={({ item, index }) => {
+            return (
+              <ProductCard
+                productId={item.id}
+                index={index}
+                handleAddToCart={handleAddToCart}
+              />
+            );
+          }}
+        />
+      )}
     </View>
   );
 };

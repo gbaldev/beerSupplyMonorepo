@@ -17,11 +17,14 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
     data: products,
     isError: productError,
     isLoading: productIsLoading,
+    refetch: refetchProducts,
   } = useGetProducts();
+
   const {
     data: stock,
     isError: stockError,
     isLoading: stockIsLoading,
+    refetch: refetchStock,
   } = useGetStock();
 
   const onSelectSku = useCallback(
@@ -67,6 +70,11 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
     }
   }, [stock]);
 
+  const onRefresh = useCallback(() => {
+    refetchProducts();
+    refetchStock();
+  }, [refetchProducts, refetchStock]);
+
   const contextValue = useMemo<ProductContextType>(
     () => ({
       productById,
@@ -75,6 +83,7 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
       updateSku,
       isLoading: productIsLoading || stockIsLoading,
       error: productError || stockError,
+      refetch: onRefresh,
     }),
     [
       productById,
@@ -85,6 +94,7 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
       stockIsLoading,
       productError,
       stockError,
+      onRefresh,
     ],
   );
 

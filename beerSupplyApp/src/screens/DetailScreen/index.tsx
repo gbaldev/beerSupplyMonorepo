@@ -62,7 +62,8 @@ export const DetailScreen: React.ComponentType<DetailScreenProps> = ({
       <ScrollView
         contentContainerStyle={styles.scrollviewContentContainer}
         showsHorizontalScrollIndicator={false}
-        style={styles.scrollview}>
+        style={styles.scrollview}
+      >
         <Header product={product} stock={stock} />
         <Separator height={29} />
         <Description product={product} />

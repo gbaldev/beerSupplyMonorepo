@@ -23,16 +23,10 @@ const StackNavigator: React.ComponentType<StackNavigatorProps> = () => {
             headerLeft: MenuButton,
             headerRight: ProfileIcon,
             headerTransparent: true,
-            title: '',
             headerStyle: {
               backgroundColor: colors.appBackground,
             },
-            contentStyle: {
-              backgroundColor: 'transparent',
-            },
-            headerLargeStyle: {
-              backgroundColor: 'transparent',
-            },
+            title: '',
           })}
         />
         <Stack.Screen
