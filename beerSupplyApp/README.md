@@ -21,4 +21,6 @@ npm start
 ## Step 3: Run Simulator/Emulator
 At this point, you should be able to run the app in the iOS simulator or in the Android emulator by typing **i** or **a** respectively.
 
+![alt text](image.png)
+
 You can also run directly from xCode or Android Studio.
