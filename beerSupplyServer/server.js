@@ -8,28 +8,33 @@ const PORT = 3000;
 
 app.use('/public/products', express.static(path.join(__dirname, 'public/products')));
 
+const DELAY_MS = 2000;
 
 app.get('/api/products', (req, res) => {
-  res.json(products);
+  setTimeout(() => {
+    res.json(products);
+  }, DELAY_MS);
 });
-
 
 app.get('/api/stock-price/:sku', (req, res) => {
   const sku = req.params.sku;
   const stockInfo = stockPrice[sku];
 
-  if (stockInfo) {
-    res.json(stockInfo);
-  } else {
-    res.status(404).json({ error: 'SKU not found' });
-  }
+  setTimeout(() => {
+    if (stockInfo) {
+      res.json(stockInfo);
+    } else {
+      res.status(404).json({ error: 'SKU not found' });
+    }
+  }, DELAY_MS);
 });
 
 app.get('/api/stock-price', (req, res) => {
-  res.json(stockPrice);
+  setTimeout(() => {
+    res.json(stockPrice);
+  }, DELAY_MS);
 });
 
 app.listen(PORT, () => {
   console.log(`Server is running on http://localhost:${PORT}`);
 });
-
