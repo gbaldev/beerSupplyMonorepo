@@ -14,15 +14,15 @@ const Header: React.ComponentType<HeaderProps> = ({ product, stock }) => {
   return (
     <View>
       <View style={styles.headerContainer}>
-        <Text style={fontStyle.DM_SANS_700_24}>{product.brand}</Text>
+        <Text style={fontStyle.DM_SANS_700_24}>{product?.brand}</Text>
         <Text style={[fontStyle.DM_SANS_700_24, { color: colors.orange }]}>
-          {toDollar(stock.price)}
+          {toDollar(stock?.price)}
         </Text>
       </View>
       <View style={styles.subheaderContainer}>
         <Text style={fontStyle.DM_SANS_400_14}>
-          Origin: {product.origin}
-          {'  '}|{'  '}Stock: {stock.stock}
+          Origin: {product?.origin}
+          {'  '}|{'  '}Stock: {stock?.stock}
         </Text>
       </View>
     </View>

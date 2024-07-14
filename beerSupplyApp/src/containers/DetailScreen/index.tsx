@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useRoute, RouteProp } from '@react-navigation/native';
 import { useProducts } from '@contexts/Products/context';
 import useGetStockBySku from '@hooks/useGetStockBySku';
