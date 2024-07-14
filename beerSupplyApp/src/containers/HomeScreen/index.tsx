@@ -9,7 +9,7 @@ import styles from './styles';
 export interface HomeScreenContainerProps {}
 
 export const HomeScreenContainer: React.FC<HomeScreenContainerProps> = () => {
-  const { productById, isLoading, error, refetch } = useProducts();
+  const { productById, isLoading, error, refetch, isFetching } = useProducts();
 
   // Make here in the container any transformation or calculation before presenting.
   const productList = [...productById.values()];
@@ -25,15 +25,22 @@ export const HomeScreenContainer: React.FC<HomeScreenContainerProps> = () => {
   if (error || isLoading) {
     return (
       <View style={styles.container}>
-        {error ? (
+        {error && !isFetching ? (
           <Error onRefresh={refetch} />
         ) : (
-          <Loader isLoading={isLoading} />
+          <Loader isLoading={isLoading || isFetching} />
         )}
       </View>
     );
   }
-  return <HomeScreen products={productList} displayName={displayName} />;
+  return (
+    <HomeScreen
+      products={productList}
+      displayName={displayName}
+      refetch={refetch}
+      isLoading={isFetching}
+    />
+  );
 };
 
 export default HomeScreenContainer;

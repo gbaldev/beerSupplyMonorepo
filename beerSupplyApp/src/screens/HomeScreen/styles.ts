@@ -33,6 +33,21 @@ const useStyle = () => {
       borderRadius: 50,
     },
     flatList: { height: '100%' },
+    button: {
+      borderRadius: 12,
+      padding: 10,
+      margin: 24,
+      elevation: 2,
+      backgroundColor: colors.orange,
+      alignSelf: 'stretch',
+    },
+    textStyle: {
+      color: colors.white,
+      fontWeight: 'bold',
+      textAlign: 'center',
+    },
+    emptyCompContainer: { height: '100%', justifyContent: 'center' },
+    emptyCompLabel: { color: colors.orange, alignSelf: 'center' },
   });
 };
 

@@ -13,6 +13,7 @@ export type ProductContextType = {
   isLoading: boolean;
   error: boolean;
   refetch: () => void;
+  isFetching: boolean;
 };
 
 const ProductsContext = createContext<ProductContextType | null>(null);

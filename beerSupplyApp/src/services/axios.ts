@@ -37,21 +37,10 @@ class AxiosImpl implements HttpRequests {
     return _data;
   };
 
-  post = async () => {
-    // TO-DO post implementation
-  };
-
-  put = async () => {
-    // TO-DO put implementation
-  };
-
-  patch = async () => {
-    // TO-DO patch implementation
-  };
-
-  delete = async () => {
-    // TO-DO delete implementation
-  };
+  post = async () => {};
+  put = async () => {};
+  patch = async () => {};
+  delete = async () => {};
 }
 
 export default AxiosImpl;

@@ -18,6 +18,7 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
     isError: productError,
     isLoading: productIsLoading,
     refetch: refetchProducts,
+    isFetching: isFetchingProducts,
   } = useGetProducts();
 
   const {
@@ -25,6 +26,7 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
     isError: stockError,
     isLoading: stockIsLoading,
     refetch: refetchStock,
+    isFetching: isFetchingStock,
   } = useGetStock();
 
   const onSelectSku = useCallback(
@@ -84,6 +86,7 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
       isLoading: productIsLoading || stockIsLoading,
       error: productError || stockError,
       refetch: onRefresh,
+      isFetching: isFetchingProducts && isFetchingStock,
     }),
     [
       productById,
@@ -95,6 +98,8 @@ export const ProductsProvider: React.ComponentType<ProductsProviderProps> = ({
       productError,
       stockError,
       onRefresh,
+      isFetchingProducts,
+      isFetchingStock,
     ],
   );
 
