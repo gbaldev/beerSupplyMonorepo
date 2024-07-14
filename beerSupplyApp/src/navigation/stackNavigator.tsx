@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, TouchableOpacity, Image, Alert } from 'react-native';
 import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { colors } from '@utils/constants';
@@ -65,8 +65,17 @@ const styles = StyleSheet.create({
 });
 
 const MenuButton = () => {
+  const moreHandler = () => {
+    Alert.alert(
+      'More button pressed',
+      "Not sure, but this should probably take you to a 'More' page, like some sort of filtering configuration for the home page.",
+      [{ text: 'OK' }],
+      { cancelable: false },
+    );
+  };
+
   return (
-    <TouchableOpacity style={styles.iconContainer}>
+    <TouchableOpacity style={styles.iconContainer} onPress={moreHandler}>
       <Icon size={24} name="menu" />
     </TouchableOpacity>
   );
@@ -82,16 +91,33 @@ const BackButton = () => {
 };
 
 const DotsButton = () => {
+  const dotsHandler = () => {
+    Alert.alert(
+      'Dots icon pressed',
+      'This should take you to a detail page with more options, or display more options somehow.',
+      [{ text: 'OK' }],
+      { cancelable: false },
+    );
+  };
   return (
-    <TouchableOpacity style={styles.iconContainer}>
+    <TouchableOpacity style={styles.iconContainer} onPress={dotsHandler}>
       <Icon size={24} name="dots" />
     </TouchableOpacity>
   );
 };
 
 const ProfileIcon = () => {
+  const profileHandler = () => {
+    Alert.alert(
+      'Profile icon pressed',
+      'This should take you to the profile page.',
+      [{ text: 'OK' }],
+      { cancelable: false },
+    );
+  };
+
   return (
-    <TouchableOpacity>
+    <TouchableOpacity onPress={profileHandler}>
       <Image
         source={require('../assets/images/profile.jpg')}
         style={styles.image}
