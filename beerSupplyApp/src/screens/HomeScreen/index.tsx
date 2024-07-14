@@ -12,7 +12,7 @@ import ProductCard from './components/ProductCard';
 import AddToCartModal from './components/AddToCartModal';
 import Separator from '@components/Separator';
 import Product from '@models/Product';
-import { colors, fontStyle } from '@utils/constants';
+import { fontStyle } from '@utils/constants';
 
 interface HomeScreenProps {
   products: Product[];
