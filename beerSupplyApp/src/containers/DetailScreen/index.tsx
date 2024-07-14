@@ -23,12 +23,7 @@ export const DetailScreenContainer: React.FC<
     data: selectedStock,
     isError,
     isLoading,
-    refetch,
   } = useGetStockBySku(product?.selectedSkuCode ?? '');
-
-  useEffect(() => {
-    console.log(isError, isLoading, refetch);
-  }, [isError, isLoading, refetch]);
 
   if (
     !product ||
