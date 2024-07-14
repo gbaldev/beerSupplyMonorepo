@@ -5,36 +5,23 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import {
-  Text,
-  View,
-  FlatList,
-  Animated,
-  Image,
-  TouchableOpacity,
-} from 'react-native';
+import { Text, View, FlatList, Animated } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import useStyles from './styles';
 import ProductCard from './components/ProductCard';
 import AddToCartModal from './components/AddToCartModal';
 import Separator from '@components/Separator';
 import Product from '@models/Product';
-import { colors, fontStyle } from '@utils/constants';
+import { fontStyle } from '@utils/constants';
 
 interface HomeScreenProps {
   products: Product[];
   displayName: string;
-  isError: boolean;
-  isLoading: boolean;
-  onRefresh: () => void;
 }
 
 export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
   products,
   displayName,
-  isError,
-  isLoading,
-  onRefresh,
 }) => {
   const OFFSET = 80;
   const navigation = useNavigation();
@@ -94,14 +81,6 @@ export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
     };
   }, [scrollY, navigation]);
 
-  if (isLoading) {
-    return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Loading</Text>
-      </View>
-    );
-  }
-
   return (
     <View style={styles.container}>
       <AddToCartModal
@@ -110,40 +89,23 @@ export const HomeScreen: React.ComponentType<HomeScreenProps> = ({
         productDetail={productDeatil.current}
         productName={productName.current}
       />
-      {isError ? (
-        <>
-          <View style={styles.imageContainer}>
-            <Image
-              source={require('../../assets/images/error.png')}
-              style={styles.imageError}
-              resizeMode="contain"
+      <FlatList
+        style={styles.flatList}
+        ListHeaderComponent={Header}
+        onScroll={onScrollHandler}
+        showsVerticalScrollIndicator={false}
+        data={products}
+        numColumns={2}
+        renderItem={({ item, index }) => {
+          return (
+            <ProductCard
+              productId={item.id}
+              index={index}
+              handleAddToCart={handleAddToCart}
             />
-          </View>
-          <TouchableOpacity style={styles.button} onPress={onRefresh}>
-            <Text style={[fontStyle.DM_SANS_700_24, { color: colors.white }]}>
-              Retry
-            </Text>
-          </TouchableOpacity>
-        </>
-      ) : (
-        <FlatList
-          style={styles.flatList}
-          ListHeaderComponent={Header}
-          onScroll={onScrollHandler}
-          showsVerticalScrollIndicator={false}
-          data={products}
-          numColumns={2}
-          renderItem={({ item, index }) => {
-            return (
-              <ProductCard
-                productId={item.id}
-                index={index}
-                handleAddToCart={handleAddToCart}
-              />
-            );
-          }}
-        />
-      )}
+          );
+        }}
+      />
     </View>
   );
 };

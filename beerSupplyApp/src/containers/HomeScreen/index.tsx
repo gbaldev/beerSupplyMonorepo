@@ -1,6 +1,10 @@
 import React from 'react';
+import { View } from 'react-native';
 import { useProducts } from '@contexts/Products/context';
 import HomeScreen from '@screens/HomeScreen';
+import Loader from '@components/Loader';
+import Error from '@components/Error';
+import styles from './styles';
 
 export interface HomeScreenContainerProps {}
 
@@ -18,15 +22,18 @@ export const HomeScreenContainer: React.FC<HomeScreenContainerProps> = () => {
   let displayName =
     userInfo.gender === 'm' ? `Mr. ${userInfo.name}` : `Ms. ${userInfo.name}`;
 
-  return (
-    <HomeScreen
-      products={productList}
-      displayName={displayName}
-      isError={error}
-      isLoading={isLoading}
-      onRefresh={refetch}
-    />
-  );
+  if (error || isLoading) {
+    return (
+      <View style={styles.container}>
+        {error ? (
+          <Error onRefresh={refetch} />
+        ) : (
+          <Loader isLoading={isLoading} />
+        )}
+      </View>
+    );
+  }
+  return <HomeScreen products={productList} displayName={displayName} />;
 };
 
 export default HomeScreenContainer;

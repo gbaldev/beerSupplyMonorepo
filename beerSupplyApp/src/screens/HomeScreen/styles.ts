@@ -1,11 +1,10 @@
-import { Dimensions, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { colors, isAndroid } from '@utils/constants';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const useStyle = () => {
   const insets = useSafeAreaInsets();
   const paddingTop = isAndroid ? 70 : insets.top + 55;
-  const { width } = Dimensions.get('window');
   return StyleSheet.create({
     container: {
       paddingHorizontal: 24,
@@ -33,21 +32,6 @@ const useStyle = () => {
       width: 40,
       borderRadius: 50,
     },
-    button: {
-      position: 'absolute',
-      alignItems: 'center',
-      alignSelf: 'center',
-      width: width * 0.8,
-      borderRadius: 12,
-      padding: 10,
-      bottom: 100,
-      elevation: 2,
-      backgroundColor: colors.orange,
-    },
-    imageError: {
-      width: '100%',
-    },
-    imageContainer: { position: 'absolute', width: '100%' },
     flatList: { height: '100%' },
   });
 };
