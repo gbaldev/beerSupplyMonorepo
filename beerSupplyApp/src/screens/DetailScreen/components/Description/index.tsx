@@ -6,7 +6,7 @@ import Product from '@models/Product';
 import { fontStyle, colors } from '@utils/constants';
 
 interface DescriptionProps {
-  product: Product;
+  product?: Product;
 }
 
 const Description: React.ComponentType<DescriptionProps> = ({ product }) => {
@@ -19,7 +19,7 @@ const Description: React.ComponentType<DescriptionProps> = ({ product }) => {
       <Separator height={10} />
       <View>
         <Text style={fontStyle.DM_SANS_400_14} numberOfLines={numberOfLines}>
-          {product.information}
+          {product?.information}
         </Text>
         <Pressable style={styles.button} onPress={toggleText}>
           <Text
@@ -28,7 +28,8 @@ const Description: React.ComponentType<DescriptionProps> = ({ product }) => {
               {
                 color: numberOfLines ? colors.orange : colors.darkGrey,
               },
-            ]}>
+            ]}
+          >
             <Text style={[{ color: colors.darkGrey }]}> ...</Text> read{' '}
             {numberOfLines ? 'more' : 'less'}
           </Text>

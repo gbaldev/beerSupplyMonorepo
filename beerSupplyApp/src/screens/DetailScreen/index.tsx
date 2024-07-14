@@ -13,8 +13,10 @@ import BeerSupplyApiInstance from '@services/BeerSupplyInstance';
 import { determineImageUri, notFoundPath } from '@utils/constants';
 
 interface DetailScreenProps {
-  product: Product;
-  stock: Stock;
+  product?: Product;
+  stock?: Stock;
+  isLoading: boolean;
+  isError: boolean;
   onSelectSku?: (sku: string, productId: number) => void;
 }
 
@@ -22,6 +24,8 @@ export const DetailScreen: React.ComponentType<DetailScreenProps> = ({
   product,
   stock,
   onSelectSku,
+  isLoading,
+  isError,
 }) => {
   const styles = useStyles();
   const [modalVisible, setModalVisible] = useState(false);
@@ -33,9 +37,9 @@ export const DetailScreen: React.ComponentType<DetailScreenProps> = ({
 
   const productInfo = useMemo(
     () => ({
-      productDeatil: product.skus.find(s => s.code === product.selectedSkuCode)
+      productDeatil: product?.skus.find(s => s.code === product.selectedSkuCode)
         ?.name,
-      productName: product.brand,
+      productName: product?.brand,
     }),
     [product],
   );
@@ -47,15 +51,15 @@ export const DetailScreen: React.ComponentType<DetailScreenProps> = ({
   useEffect(() => {
     let _uri = `${BeerSupplyApiInstance.public}${product?.image}`;
     determineImageUri(_uri, setUri);
-  }, [product.image]);
+  }, [product?.image]);
 
   return (
     <View style={styles.container}>
       <AddToCartModal
         visible={modalVisible}
         onClose={handleOnClose}
-        productDetail={productInfo.productDeatil ?? ''}
-        productName={productInfo.productName}
+        productDetail={productInfo?.productDeatil ?? ''}
+        productName={productInfo?.productName ?? ''}
       />
       <Image source={uri ? uri : notFoundPath} style={styles.image} />
       <Separator height={10} />
@@ -64,7 +68,12 @@ export const DetailScreen: React.ComponentType<DetailScreenProps> = ({
         showsHorizontalScrollIndicator={false}
         style={styles.scrollview}
       >
-        <Header product={product} stock={stock} />
+        <Header
+          isError={isError}
+          isLoading={isLoading}
+          product={product}
+          stock={stock}
+        />
         <Separator height={29} />
         <Description product={product} />
         <Separator height={22} />

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Modal, View, Text, TouchableOpacity } from 'react-native';
+import { Text, TouchableOpacity } from 'react-native';
 import styles from './styles';
+import BaseModal from '@components/BaseModal';
 
 interface AddToCartModalProps {
   visible: boolean;
@@ -16,22 +17,20 @@ const AddToCartModal: React.FC<AddToCartModalProps> = ({
   productName,
 }) => {
   return (
-    <Modal transparent={true} visible={visible} animationType="slide">
-      <View style={styles.centeredView}>
-        <View style={styles.modalView}>
-          <Text style={styles.modalText}>
-            <Text style={styles.boldText}>{productName}</Text> added to cart.
-          </Text>
-          <Text style={styles.modalText}>
-            You have successfully added{' '}
-            <Text style={styles.boldText}>{productDetail}</Text> to your cart!
-          </Text>
-          <TouchableOpacity style={styles.button} onPress={onClose}>
-            <Text style={styles.textStyle}>OK</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </Modal>
+    <BaseModal visible={visible}>
+      <>
+        <Text style={styles.modalText}>
+          <Text style={styles.boldText}>{productName}</Text> added to cart.
+        </Text>
+        <Text style={styles.modalText}>
+          You have successfully added{' '}
+          <Text style={styles.boldText}>{productDetail}</Text> to your cart!
+        </Text>
+        <TouchableOpacity style={styles.button} onPress={onClose}>
+          <Text style={styles.textStyle}>OK</Text>
+        </TouchableOpacity>
+      </>
+    </BaseModal>
   );
 };
 

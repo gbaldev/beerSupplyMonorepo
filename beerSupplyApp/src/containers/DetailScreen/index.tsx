@@ -4,11 +4,6 @@ import { useProducts } from '@contexts/Products/context';
 import useGetStockBySku from '@hooks/useGetStockBySku';
 import StackRoutes, { StackRoutesList } from '@navigation/routes';
 import DetailScreen from '@screens/DetailScreen';
-import Error from '@components/Error';
-import { View } from 'react-native';
-import Loader from '@components/Loader';
-import styles from './styles';
-
 export interface DetailScreenContainerProps {}
 
 export const DetailScreenContainer: React.FC<
@@ -25,25 +20,13 @@ export const DetailScreenContainer: React.FC<
     isLoading,
   } = useGetStockBySku(product?.selectedSkuCode ?? '');
 
-  if (
-    !product ||
-    !product.selectedSkuCode ||
-    !selectedStock ||
-    isError ||
-    isLoading
-  ) {
-    return (
-      <View style={styles.container}>
-        {isError ? <Error /> : <Loader isLoading={isLoading} />}
-      </View>
-    );
-  }
-
   return (
     <DetailScreen
       product={product}
       stock={selectedStock}
       onSelectSku={onSelectSku}
+      isLoading={isLoading}
+      isError={isError}
     />
   );
 };

@@ -13,9 +13,9 @@ const CartSection: React.ComponentType<CartSectionProps> = ({
 }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
+      <TouchableOpacity style={styles.iconContainer}>
         <Icon name="bag" size={24} />
-      </View>
+      </TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleAddToCart}>
         <Text style={[fontStyle.DM_SANS_500_16, { color: colors.white }]}>
           Add To Cart

@@ -8,7 +8,7 @@ export default StyleSheet.create({
   },
   subheaderContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    justifyContent: 'flex-start',
     alignItems: 'center',
   },
 });

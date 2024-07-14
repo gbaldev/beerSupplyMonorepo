@@ -6,7 +6,7 @@ import Product from '../../../../models/Product';
 import styles from './styles';
 
 interface SizeSectionProps {
-  product: Product;
+  product?: Product;
   onSelectSku?: (sku: string, productId: number) => void;
 }
 
@@ -30,12 +30,14 @@ const SizeSection: React.ComponentType<SizeSectionProps> = ({
               style={[
                 styles.itemNameContainer,
                 isSelected && { borderColor: colors.orange },
-              ]}>
+              ]}
+            >
               <Text
                 style={[
                   fontStyle.DM_SANS_400_14,
                   isSelected && { color: colors.orange },
-                ]}>
+                ]}
+              >
                 {item.name}
               </Text>
             </TouchableOpacity>
