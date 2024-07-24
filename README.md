@@ -13,3 +13,8 @@ To get started, ensure you follow these steps:
    Next, proceed with the instructions specified in the README file located in the app directory to run the mobile application.
 
 These steps will guide you through setting up and testing the entire application environment effectively.
+
+
+Figma Requirements: 
+![image](https://github.com/user-attachments/assets/af0b014f-28e1-47f4-a684-59ee68247900)
+
